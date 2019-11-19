@@ -19,12 +19,12 @@ const IncomeService = {
     },
     deleteIncome(knex, id) {
         return knex('income')
-          .where({ id })
+          .where('iid', id)
           .delete();
     },
     updateIncome(knex, id, newincomeFields) {
         return knex('income')
-          .where({ id })
+          .where('iid', id)
           .update(newincomeFields);
     },
 

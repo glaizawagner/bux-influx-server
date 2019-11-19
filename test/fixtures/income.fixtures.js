@@ -2,14 +2,14 @@ function makesIncomeArray() {
     return [
         {
             iid: 1,
-            date_created: '11/01/2019',
+            date_created: '2019-11-12T16:28:32.615Z',
             type: '+',
             description: 'Salary',
             value: '3500.00'
         },
         {
             iid: 2,
-            date_created: '11/15/2019',
+            date_created: '2019-11-12T16:28:32.615Z',
             type: '+',
             description: 'Other Income',
             value: '1500.00'
@@ -20,7 +20,8 @@ function makesIncomeArray() {
 
 function makeMaliciousIncome() {
     const maliciousIncome = {
-        date_created: '11/01/2019',
+        iid: 911,
+        date_created: '2019-11-12T16:28:32.615Z',
         type: '+',
         description: 'Naughty naughty very naughty <script>alert("xss");</script>',
         value: '3500.00'

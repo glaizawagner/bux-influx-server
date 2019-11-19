@@ -57,3 +57,36 @@
 {"name":"error","length":98,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
 {"name":"error","length":98,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
 {"name":"error","length":98,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"name":"error","length":98,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"name":"error","length":98,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"name":"error","length":98,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id undefined created","level":"info"}
+{"message":"Income with id undefined created","level":"info"}
+{"message":"Income with id undefined created","level":"info"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id undefined created","level":"info"}
+{"message":"Income with id undefined created","level":"info"}
+{"message":"Income with id undefined created","level":"info"}
+{"message":"Income with id undefined created","level":"info"}
+{"message":"Income with id undefined created","level":"info"}
+{"message":"Income with id undefined created","level":"info"}

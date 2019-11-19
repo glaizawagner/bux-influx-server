@@ -9,7 +9,7 @@ const IncomeService = require('./income-service');
 const jsonParser = express.json();
 
 const serializeIncome= income => ({
-  id: income.id,
+  iid: income.iid,
   date_created: income.date_created,
   type: income.type,
   description: xss(income.description),
