@@ -34,7 +34,7 @@ expensesRouter
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    for(const field of ['description', 'value']) {
+    for(const field of ['description']) {
       if(!req.body[field]) {
         logger.error(`${field} is required`);
           return res.status(400).send({
@@ -57,10 +57,10 @@ expensesRouter
     const knexInstance = req.app.get('db');
     ExpensesService.insertExpenses(knexInstance, newExpenses)
       .then(expenses => {
-        logger.info(`Expenses with id ${expenses.id} created`);
+        logger.info(`Expenses with id ${expenses.eid} created`);
         res
         .status(201)
-        .location(path.posix.join(req.originalUrl) + `/${expenses.id}`)
+        .location(path.posix.join(req.originalUrl) + `/${expenses.eid}`)
         .json(serializeExpenses(expenses));
       })
       .catch(next);

@@ -33,7 +33,7 @@ incomeRouter
       .catch(next);
   })
   .post(jsonParser, (req, res, next) => {
-    for(const field of ['description', 'value']) {
+    for(const field of ['description']) {
       if(!req.body[field]) {
         logger.error(`${field} is required`);
           return res.status(400).send({
@@ -56,10 +56,10 @@ incomeRouter
     const knexInstance = req.app.get('db');
     IncomeService.insertIncome(knexInstance, newIncome)
       .then(income => {
-        logger.info(`Income with id ${income.id} created`);
+        logger.info(`Income with id ${income.iid} created`);
         res
         .status(201)
-        .location(path.posix.join(req.originalUrl) + `/${income.id}`)
+        .location(path.posix.join(req.originalUrl) + `/${income.iid}`)
         .json(serializeIncome(income));
       })
       .catch(next);
