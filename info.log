@@ -269,3 +269,19 @@
 {"message":"Income with id 123456 not found.","level":"error"}
 {"message":"Income with id 2 deleted.","level":"info"}
 {"message":"Income with id 123456 not found.","level":"error"}
+{"message":"Income with id 12 created","level":"info"}
+{"message":"Income with id 13 created","level":"info"}
+{"message":"Income with id 14 created","level":"info"}
+{"message":"Expenses with id 19 created","level":"info"}
+{"message":"Income with id 15 created","level":"info"}
+{"message":"Income with id 16 created","level":"info"}
+{"message":"Income with id 17 created","level":"info"}
+{"message":"Income with id 18 created","level":"info"}
+{"message":"Expenses with id 20 created","level":"info"}
+{"message":"Expenses with id 21 created","level":"info"}
+{"message":"Expenses with id 22 created","level":"info"}
+{"name":"error","length":109,"severity":"ERROR","code":"22007","file":"datetime.c","line":"3789","routine":"DateTimeParseError","level":"error"}
+{"name":"error","length":109,"severity":"ERROR","code":"22007","file":"datetime.c","line":"3789","routine":"DateTimeParseError","level":"error"}
+{"name":"error","length":109,"severity":"ERROR","code":"22007","file":"datetime.c","line":"3789","routine":"DateTimeParseError","level":"error"}
+{"name":"error","length":109,"severity":"ERROR","code":"22007","file":"datetime.c","line":"3789","routine":"DateTimeParseError","level":"error"}
+{"name":"error","length":109,"severity":"ERROR","code":"22007","file":"datetime.c","line":"3789","routine":"DateTimeParseError","level":"error"}

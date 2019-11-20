@@ -26,7 +26,7 @@ describe('Expenses Endpoints', function() {
     //     });
     // });
 
-    //done
+  
     describe(`GET /api/expenses`, () => {
         context(`Given no expenses`, () => {
             it(`responds with 200 and an empty list`, () => {
@@ -74,7 +74,7 @@ describe('Expenses Endpoints', function() {
             });
         });
     });
-    //done
+  
     describe(`GET /api/expenses/:eid`, () => {
         context(`Given no expenses`, () => {
             it(`responds with 404`, () => {
@@ -126,7 +126,7 @@ describe('Expenses Endpoints', function() {
         });
 
     });
-   //done
+  
     describe(`POST /api/expenses`, () => {
         it(`creates a new expenses, responding with 201 and the new expenses`, () => {
             this.retries(3);
@@ -207,7 +207,7 @@ describe('Expenses Endpoints', function() {
         });
 
     });
-    //done
+    
     describe(`DELETE /api/expenses/:eid`, () => {
         context(`Given no expenses`, () => {
             it(`responds with 400`, () => {
@@ -245,7 +245,7 @@ describe('Expenses Endpoints', function() {
         });
 
     });
-    //done
+    
     describe(`PATCH /api/expenses/:eid`, () => {
         context(`Given no expenses`, () => {
             it(`responds with 404`, () => {

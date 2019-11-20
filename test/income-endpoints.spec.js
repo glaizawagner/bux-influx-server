@@ -27,7 +27,7 @@ describe('Income Endpoints', function() {
     //     });
     // });
 
-    //done
+    
     describe(`GET /api/income`, () => {
         context(`Given no income`, () => {
             it(`responds with 200 and an empty list`, () => {
@@ -76,7 +76,7 @@ describe('Income Endpoints', function() {
         });
 
     });
-    //done
+    
     describe(`GET /api/income/:iid`, () => {
         context(`Given no income`, () => {
             it(`responds with 404`, () => {
@@ -128,7 +128,7 @@ describe('Income Endpoints', function() {
         });
 
     });
-   //done
+   
     describe(`POST /api/income`, () => {
         it(`creates a new income, responding with 201 and the new income`, () => {
             this.retries(3);
@@ -196,7 +196,7 @@ describe('Income Endpoints', function() {
 
     });
 
-    //done
+    
     describe(`DELETE /api/income/:iid`, () => {
       context(`Given no income`, () => {
         it(`responds with 400`, () => {
@@ -235,7 +235,7 @@ describe('Income Endpoints', function() {
 
     });
 
-    //done
+    
     describe(`PATCH /api/income/:iid`, () => {
       context(`Given no income`, () => {
         it(`responds with 404`, () => {
