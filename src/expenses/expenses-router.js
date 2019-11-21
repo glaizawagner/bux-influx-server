@@ -94,9 +94,9 @@ expensesRouter
      
       const knexInstance = req.app.get('db');
       ExpensesService.deleteExpenses(knexInstance, req.params.eid)
-        .then( () => {
+        .then( expense => {
             logger.info(`Expenses with id ${eid} deleted.`);
-            res.status(204).end();
+            res.status(204).json(expense);
         })
         .catch(next);
     })

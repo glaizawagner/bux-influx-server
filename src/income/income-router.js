@@ -92,17 +92,18 @@ incomeRouter
       const { iid } = req.params;
      
       const knexInstance = req.app.get('db');
-      IncomeService.deleteIncome(knexInstance, req.params.iid)
-        .then( () => {
+      IncomeService.deleteIncome(knexInstance, iid)
+        .then( income => {
             logger.info(`Income with id ${iid} deleted.`);
-            res.status(204).end();
+            res.status(204).json(income);
         })
         .catch(next);
     })
     .patch(jsonParser, (req, res, next) => {
         const { date_created, type, description, value } = req.body;
         const incomeToUpdate = { date_created, type, description, value };
-      
+        const { iid } = req.params;
+
         const numberOfValues = Object.values(incomeToUpdate).filter(Boolean).length;
           if (numberOfValues === 0)
             return res.status(400).json({
@@ -114,7 +115,7 @@ incomeRouter
         const knexInstance = req.app.get('db');
         IncomeService.updateIncome(
           knexInstance,
-          req.params.iid,
+          iid,
           incomeToUpdate
         )
           .then( () => {
