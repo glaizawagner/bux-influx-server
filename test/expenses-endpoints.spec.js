@@ -132,7 +132,7 @@ describe('Expenses Endpoints', function() {
             this.retries(3);
             const newExpenses= {
               date_created: '2019-11-12T16:28:32.615Z',
-              type: '-',
+              type: 'exp',
               description: 'Salary',
               value: '2000.00',
               percentage: '15.00'
@@ -270,7 +270,7 @@ describe('Expenses Endpoints', function() {
               const idToUpdate = 2
               const updateExpenses = {
                   date_created: '2019-11-12T16:28:32.615Z',
-                  type: '+',
+                  type: 'exp',
                   description: 'Salary',
                   value: '2000.00',
                   percentage: '15.00'
@@ -309,7 +309,6 @@ describe('Expenses Endpoints', function() {
               const idToUpdate = 2
               const updateExpenses = {
                 description: 'updated expenses description',
-    
               }
               const expectedExpenses = {
                 ...testExpenses[idToUpdate - 1],

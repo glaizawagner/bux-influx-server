@@ -1,5 +1,6 @@
 TRUNCATE
     income,
-    expenses
+    expenses,
+    users
     RESTART IDENTITY CASCADE;
 

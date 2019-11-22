@@ -404,3 +404,88 @@
 {"message":"Income with id 30 created","level":"info"}
 {"message":"Income with id 30 deleted.","level":"info"}
 {"message":"Expenses with id 40 deleted.","level":"info"}
+{"message":"Income with id 31 created","level":"info"}
+{"message":"Expenses with id 42 created","level":"info"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Income with id 1 created","level":"info"}
+{"message":"Income with id 123456 not found.","level":"error"}
+{"message":"Income with id 2 deleted.","level":"info"}
+{"message":"Income with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Income with id 1 created","level":"info"}
+{"message":"Income with id 123456 not found.","level":"error"}
+{"message":"Income with id 2 deleted.","level":"info"}
+{"message":"Income with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 42 deleted.","level":"info"}
+{"message":"Expenses with id 41 deleted.","level":"info"}
+{"message":"Expenses with id 27 deleted.","level":"info"}
+{"message":"Expenses with id 33 deleted.","level":"info"}
+{"message":"Income with id 31 deleted.","level":"info"}
+{"message":"Income with id 29 deleted.","level":"info"}
+{"message":"Income with id 1 deleted.","level":"info"}
+{"message":"Income with id 24 deleted.","level":"info"}
+{"message":"Income with id 22 deleted.","level":"info"}
+{"message":"Income with id 32 created","level":"info"}
+{"message":"Income with id 33 created","level":"info"}
+{"message":"Income with id 32 deleted.","level":"info"}
+{"message":"Income with id 34 created","level":"info"}
+{"message":"Income with id 34 deleted.","level":"info"}
+{"message":"Expenses with id 43 created","level":"info"}
+{"message":"Expenses with id 43 deleted.","level":"info"}
+{"message":"Expenses with id 44 created","level":"info"}
+{"message":"Expenses with id 44 deleted.","level":"info"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"numeric.c","line":"5663","routine":"set_var_from_str","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"numeric.c","line":"5663","routine":"set_var_from_str","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"numeric.c","line":"5663","routine":"set_var_from_str","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"numeric.c","line":"5663","routine":"set_var_from_str","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"numeric.c","line":"5663","routine":"set_var_from_str","level":"error"}
+{"name":"error","length":104,"severity":"ERROR","code":"22P02","file":"numeric.c","line":"5663","routine":"set_var_from_str","level":"error"}
+{"message":"Expenses with id 45 created","level":"info"}
+{"message":"Expenses with id 45 deleted.","level":"info"}
+{"message":"Expenses with id 46 created","level":"info"}
+{"message":"Expenses with id 47 created","level":"info"}
+{"message":"Expenses with id 48 created","level":"info"}
+{"message":"Income with id 35 created","level":"info"}
+{"message":"Expenses with id 49 created","level":"info"}
+{"message":"Income with id 33 deleted.","level":"info"}
+{"message":"Expenses with id 48 deleted.","level":"info"}
+{"message":"Expenses with id 49 deleted.","level":"info"}
+{"message":"Expenses with id 47 deleted.","level":"info"}
+{"message":"Expenses with id 46 deleted.","level":"info"}
+{"message":"Income with id 35 deleted.","level":"info"}
+{"message":"Income with id 36 created","level":"info"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Income with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Income with id 1 created","level":"info"}
+{"message":"Income with id 123456 not found.","level":"error"}
+{"message":"Income with id 2 deleted.","level":"info"}
+{"message":"Income with id 123456 not found.","level":"error"}

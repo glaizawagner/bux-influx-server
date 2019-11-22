@@ -134,7 +134,7 @@ describe('Income Endpoints', function() {
             this.retries(3);
             const newIncome= {
               date_created: '2019-11-12T16:28:32.615Z',
-              type: '+',
+              type: 'inc',
               description: 'Salary',
               value: '2000.00',
             };
@@ -260,7 +260,7 @@ describe('Income Endpoints', function() {
           const idToUpdate = 2
           const updateIncome = {
               date_created: '2019-11-12T16:28:32.615Z',
-              type: '+',
+              type: 'inc',
               description: 'Salary',
               value: '2000.00',
           }

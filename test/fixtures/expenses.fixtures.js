@@ -3,7 +3,7 @@ function makesExpensesArray() {
         {
             eid: 1,
             date_created: '2019-11-12T16:28:32.615Z',
-            type: '-',
+            type: 'exp',
             description: 'Salary',
             value: '3500.00',
             percentage: '17.00',
@@ -11,7 +11,7 @@ function makesExpensesArray() {
         {
             eid: 2,
             date_created: '2019-11-12T16:28:32.615Z',
-            type: '-',
+            type: 'exp',
             description: 'Other Expenses',
             value: '1500.00',
             percentage: '15.00'
@@ -24,7 +24,7 @@ function makeMaliciousExpenses() {
     const maliciousExpenses = {
         eid: 911,
         date_created: '2019-11-12T16:28:32.615Z',
-        type: '-',
+        type: 'exp',
         description: 'Naughty naughty very naughty <script>alert("xss");</script>',
         value: '3500.00',
         percentage: '17.00'
