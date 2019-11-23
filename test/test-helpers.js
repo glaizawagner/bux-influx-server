@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken')
 function makeUsersArray() {
   return [
     {
-      id: 1,
+      uid: 1,
       user_name: 'test-user-1',
       full_name: 'Test user 1',
       nickname: 'TU1',
@@ -13,7 +13,7 @@ function makeUsersArray() {
       date_created: '2029-01-22T16:28:32.615Z',
     },
     {
-      id: 2,
+      uid: 2,
       user_name: 'test-user-2',
       full_name: 'Test user 2',
       nickname: 'TU2',
@@ -21,7 +21,7 @@ function makeUsersArray() {
       date_created: '2029-01-22T16:28:32.615Z',
     },
     {
-      id: 3,
+      uid: 3,
       user_name: 'test-user-3',
       full_name: 'Test user 3',
       nickname: 'TU3',
@@ -29,7 +29,7 @@ function makeUsersArray() {
       date_created: '2029-01-22T16:28:32.615Z',
     },
     {
-      id: 4,
+      uid: 4,
       user_name: 'test-user-4',
       full_name: 'Test user 4',
       nickname: 'TU4',
@@ -55,7 +55,7 @@ function makeIncomeArray(users) {
             date_created: '2019-11-12T16:28:32.615Z',
             type: 'inc',
             description: 'Other Income',
-            value: '1500.00',
+            value: '3500.00',
             user_id: users[1].uid
         }
     ];
@@ -86,13 +86,33 @@ function makeExpensesArray(users) {
     ];
 }
 
+//make expected income
+function makeExpectedIncome(users, inc) {
+  const user = users
+    .find(user => user.uid === inc.user_id)
+  
+    return {
+      iid: inc.iid,
+      date_created: inc.date_created,
+      type: inc.type,
+      description: inc.description,
+      value: inc.value,
+      user: {
+        uid: user.uid,
+        user_name: user.user_name,
+        full_name: user.full_name,
+        nickname: user.nickname,
+        date_created: user.date_created,
+      },
+    }
+}
 //seed malicious income
-function seedMaliciousIncome(db, user, inc) {
+function seedMaliciousIncome(db, user, income) {
     return seedUsers(db, [user])
       .then(() =>
         db
           .into('income')
-          .insert([inc])
+          .insert([income])
       );
 }
 
@@ -107,7 +127,7 @@ function seedMaliciousExpenses(db, user, expense) {
 }
 
 //make malicious income
-function makeMaliciousIncome() {
+function makeMaliciousIncome(user) {
     const maliciousIncome = {
         iid: 911,
         date_created: '2019-11-12T16:28:32.615Z',
@@ -117,7 +137,7 @@ function makeMaliciousIncome() {
         user_id: user.uid,
     }
     const expectedIncome = {
-        ...maliciousIncome,
+        ...makeExpectedIncome([user], maliciousIncome),
         description: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
     }
 
@@ -128,7 +148,7 @@ function makeMaliciousIncome() {
 }
 
 //make malicious expenses
-function makeMaliciousExpenses() {
+function makeMaliciousExpenses(user) {
     const maliciousExpenses = {
         eid: 911,
         date_created: '2019-11-12T16:28:32.615Z',
@@ -220,11 +240,12 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
       algorithm: 'HS256',
     });
     return `Bearer ${token}`;
-  }
+}
   
 module.exports = {
     makeUsersArray,
     makeExpensesArray,
+    makeExpectedIncome,
     makeMaliciousIncome,
     makeMaliciousExpenses,
     cleanTables,

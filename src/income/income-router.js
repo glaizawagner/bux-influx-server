@@ -1,38 +1,26 @@
 /* eslint-disable quotes */
-const path = require('path');
 const express = require('express');
-const xss = require('xss');
+const path = require('path');
 const logger = require('../logger');
-
+const { requireAuth } = require('../middleware/jwt-auth');
 const incomeRouter = express.Router();
 const IncomeService = require('./income-service');
 const jsonParser = express.json();
 
-const serializeIncome= income => ({
-  iid: income.iid,
-  date_created: income.date_created,
-  type: income.type,
-  description: xss(income.description),
-  value: income.value,
-});
-
 /* income routes */
 incomeRouter
   .route('/')
-  .get((req, res, next) => {
-    const knexInstance = req.app.get('db');
-    IncomeService.getAllIncome(knexInstance)
-      .then(income => {
-        if(!income){
-          return res.status(400).json({
-            error: { message: `Income doesn't exist` }
-          });
-        }
-        res.json(income.map(serializeIncome));
+  .get(requireAuth,(req, res, next) => {
+    IncomeService.getAllIncome(
+      req.app.get('db'),
+      req.user.uid
+      )
+      .then(incomes => {
+          res.json(IncomeService.serializeIncomes(incomes));
       })
       .catch(next);
   })
-  .post(jsonParser, (req, res, next) => {
+  .post(requireAuth, jsonParser, (req, res, next) => {
     for(const field of ['description']) {
       if(!req.body[field]) {
         logger.error(`${field} is required`);
@@ -44,30 +32,31 @@ incomeRouter
 
     const { date_created, type, description, value } = req.body;
     
-    // if(!Number.isInteger(ratingNum) || ratingNum < 0 || ratingNum > 5) {
-    //   logger.error(`Invalid rating '${rating}' supplied`);
-    //     return res.status(400).send({
-    //       error: { message: `'rating' must be a number between 0 and 5`}
-    //     });
-    // }
-
     const newIncome= { date_created, type, description, value };
 
-    const knexInstance = req.app.get('db');
-    IncomeService.insertIncome(knexInstance, newIncome)
+    newIncome.user_id = req.user.uid;
+
+    IncomeService.insertIncome(
+      req.app.get('db'), 
+      newIncome, 
+      req.user.uid
+     )
       .then(income => {
         logger.info(`Income with id ${income.iid} created`);
         res
         .status(201)
         .location(path.posix.join(req.originalUrl) + `/${income.iid}`)
-        .json(serializeIncome(income));
+        .json(IncomeService.serializeIncome(income));
       })
       .catch(next);
   });
 
   incomeRouter
   .route('/:iid')
-  .all((req, res, next) => {
+  // .get(requireAuth, (req, res) => {
+  //   res.json(IncomeService.serializeIncome(res.inc));
+  // })
+  .all(requireAuth, (req, res, next) => {
     const { iid } = req.params;
 
     const knexInstance = req.app.get('db');
@@ -85,10 +74,10 @@ incomeRouter
       })
       .catch(next);
     })
-    .get((req, res, next) => {
-      res.json(serializeIncome(res.income));
+    .get(requireAuth, (req, res, next) => {
+      res.json(IncomeService.serializeIncome(res.income));
     })
-    .delete((req, res, next) => {
+    .delete(requireAuth,(req, res, next) => {
       const { iid } = req.params;
      
       const knexInstance = req.app.get('db');
@@ -123,5 +112,26 @@ incomeRouter
           })
           .catch(next);
 });
+
+// /* async/await syntax for promises */
+// async function checkIncomeExists(req, res, next) {
+//   try {
+//     const income = await IncomeService.getById(
+//       req.app.get('db'),
+//       req.params.iid
+//     )
+
+//     if (!income)
+//       return res.status(404).json({ 
+//         error: { message: `Income doesn't exist`}
+//       })
+
+//     res.income = income
+//     next()
+//   } catch (error) {
+//     next(error)
+//   }
+// }
+
 
 module.exports = incomeRouter;

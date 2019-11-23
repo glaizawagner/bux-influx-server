@@ -489,3 +489,177 @@
 {"message":"Income with id 123456 not found.","level":"error"}
 {"message":"Income with id 2 deleted.","level":"info"}
 {"message":"Income with id 123456 not found.","level":"error"}
+{"message":"Income with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 1 deleted.","level":"info"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Income with id 1 deleted.","level":"info"}
+{"message":"Income with id 3 created","level":"info"}
+{"message":"Expenses with id 3 created","level":"info"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"message":"Income with id 1 created","level":"info"}
+{"level":"error"}
+{"message":"description is required","level":"error"}
+{"message":"Income with id 1 created","level":"info"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"name":"error","length":160,"severity":"ERROR","code":"42703","hint":"Perhaps you meant to reference the column \"inc.iid\".","position":"329","file":"parse_relation.c","line":"3294","routine":"errorMissingColumn","level":"error"}
+{"name":"error","length":160,"severity":"ERROR","code":"42703","hint":"Perhaps you meant to reference the column \"inc.iid\".","position":"329","file":"parse_relation.c","line":"3294","routine":"errorMissingColumn","level":"error"}
+{"name":"error","length":160,"severity":"ERROR","code":"42703","hint":"Perhaps you meant to reference the column \"inc.iid\".","position":"329","file":"parse_relation.c","line":"3294","routine":"errorMissingColumn","level":"error"}
+{"name":"error","length":167,"severity":"ERROR","code":"42703","hint":"Perhaps you meant to reference the column \"inc.user_id\".","position":"78","file":"parse_relation.c","line":"3294","routine":"errorMissingColumn","level":"error"}
+{"name":"error","length":167,"severity":"ERROR","code":"42703","hint":"Perhaps you meant to reference the column \"inc.user_id\".","position":"78","file":"parse_relation.c","line":"3294","routine":"errorMissingColumn","level":"error"}
+{"name":"error","length":167,"severity":"ERROR","code":"42703","hint":"Perhaps you meant to reference the column \"inc.user_id\".","position":"78","file":"parse_relation.c","line":"3294","routine":"errorMissingColumn","level":"error"}
+{"name":"error","length":169,"severity":"ERROR","code":"42803","position":"8","file":"parse_agg.c","line":"1388","routine":"check_ungrouped_columns_walker","level":"error"}
+{"name":"error","length":169,"severity":"ERROR","code":"42803","position":"8","file":"parse_agg.c","line":"1388","routine":"check_ungrouped_columns_walker","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"name":"error","length":116,"severity":"ERROR","code":"42P01","position":"120","file":"parse_relation.c","line":"3240","routine":"errorMissingRTE","level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"description is required","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}
+{"message":"Expenses with id 123 not found.","level":"error"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 1 created","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 123456 not found.","level":"error"}
+{"message":"Income with id 123 not found.","level":"error"}

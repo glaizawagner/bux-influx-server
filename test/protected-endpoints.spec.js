@@ -2,17 +2,12 @@ const knex = require('knex')
 const app = require('../src/app')
 const helpers = require('./test-helpers')
 
-describe.only('Protected Endpoints', function() {
+describe('Protected Endpoints', function() {
   let db;
   const {
     testUsersInc,
     testIncome,
   } = helpers.makeIncomeFixtures();
-
-//   const {
-//     testUsersExp,
-//     testExpenses,
-//   } = helpers.makeExpensesFixtures()
 
   before('make knex instance', () => {
     db = knex({
@@ -54,7 +49,7 @@ describe.only('Protected Endpoints', function() {
                     .expect(401, { error: `Missing bearer token` })
             })
             it(`responds 401 'Unauthorized request' when invalid JWT secret`, () => {
-                const validUser = testUsers[0]
+                const validUser = testUsersInc[0]
                 const invalidSecret = 'bad-secret'
                 return endpoint.method(endpoint.path)
                 .set('Authorization', helpers.makeAuthHeader(validUser, invalidSecret))
