@@ -87,7 +87,9 @@ describe('Income Endpoints', function() {
     describe(`GET /api/income/:iid`, () => {
         context(`Given no income`, () => {
           beforeEach(() =>
-            helpers.seedUsers(db, testUsersInc)
+            helpers.seedUsers(db, 
+              testUsersInc
+              )
           )
           it(`responds with 404`, () => {
               const iid = 123;

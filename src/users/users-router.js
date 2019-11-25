@@ -2,24 +2,28 @@
 const express = require('express');
 const path = require('path');
 const UsersService = require('../users/users-service');
-
 const usersRouter = express.Router();
 const jsonBodyParser = express.json();
+// const { requireAuth } = require('../middleware/jwt-auth');
 
 usersRouter
-  .post('/', jsonBodyParser, (req, res, next) => {
-    const { password, user_name, full_name, nickname } = req.body;
+  .route('/')
+  .post(jsonBodyParser, (req, res, next) => {
+    const knexInstance = req.app.get('db');
+    const { user_name, full_name, password, nickname } = req.body;
+    const newUser = { user_name, full_name, password, nickname };
 
-    for (const field of ['full_name', 'user_name', 'password'])
-      if (!req.body[field])
+    for (const [key, value] of Object.entries(newUser))
+      if (!value)
         return res.status(400).json({
-          error: `Missing '${field}' in request body`
+          error: `Missing '${key}' in request body`
         });
 
     const passwordError = UsersService.validatePassword(password);
 
-    if (passwordError)
-     return res.status(400).json({ error: passwordError });
+    if (passwordError){
+      return res.status(400).json({ error: passwordError });
+    }
 
      UsersService.hasUserWithUserName(
         req.app.get('db'),
@@ -31,17 +35,11 @@ usersRouter
 
             return UsersService.hashPassword(password)
                 .then(hashedPassword => {
-                    const newUser = {
-                        user_name,
-                        password: hashedPassword,
-                        full_name,
-                        nickname,
-                        date_created: 'now()',
-                        };
+                    newUser.password = hashedPassword;
                         
                         return UsersService.insertUser(
-                        req.app.get('db'),
-                        newUser
+                          knexInstance,
+                          newUser
                         )
                         .then(user => {
                             res
@@ -53,6 +51,17 @@ usersRouter
         })
         .catch(next);
   });
+
+  // usersRouter
+  // .route('/current-user')
+  // .all(requireAuth)
+  // .get((req, res) => {
+  //   const currentUser = {
+  //     user_name: req.user.user_name,
+  //     user_id: req.user.uid
+  //   };
+  //   return res.status(200).json(UsersService.serializeUser(currentUser));
+  // });
 
 
 module.exports = usersRouter;

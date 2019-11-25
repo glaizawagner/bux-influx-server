@@ -18,7 +18,7 @@ app.use(morgan((NODE_ENV === 'production') ? 'tiny' : 'common', {
 
 app.use(helmet());
 app.use(cors());
-app.use(express.json());
+// app.use(express.json());
 
 app.use('/api/income', incomeRouter);
 app.use('/api/expenses', expensesRouter);
