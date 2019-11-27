@@ -1,39 +1,28 @@
 /* eslint-disable quotes */
 const path = require('path');
 const express = require('express');
-const xss = require('xss');
-const logger = require('../logger');
 
+const logger = require('../logger');
+const { requireAuth } = require('../middleware/jwt-auth');
 const expensesRouter = express.Router();
 const ExpensesService = require('./expenses-service');
 const jsonParser = express.json();
 
-const serializeExpenses= expenses => ({
-  eid: expenses.eid,
-  date_created: expenses.date_created,
-  type: expenses.type,
-  description: xss(expenses.description),
-  value: expenses.value,
-  percentage: expenses.percentage
-});
 
 /* expenses routes */
 expensesRouter
   .route('/')
-  .get((req, res, next) => {
-    const knexInstance = req.app.get('db');
-    ExpensesService.getAllExpenses(knexInstance)
+  .get(requireAuth,(req, res, next) => {
+    ExpensesService.getAllExpenses(
+      req.app.get('db'), 
+      req.user.uid
+      )
       .then(expenses => {
-        if(!expenses){
-          return res.status(400).json({
-            error: { message: `Expenses doesn't exist` }
-          });
-        }
-        res.json(expenses.map(serializeExpenses));
+          res.json(ExpensesService.serializeExpenses(expenses));
       })
       .catch(next);
   })
-  .post(jsonParser, (req, res, next) => {
+  .post(requireAuth, jsonParser, (req, res, next) => {
     for(const field of ['description']) {
       if(!req.body[field]) {
         logger.error(`${field} is required`);
@@ -44,31 +33,29 @@ expensesRouter
     }
 
     const { date_created, type, description, value, percentage } = req.body;
-    
-    // if(!Number.isInteger(ratingNum) || ratingNum < 0 || ratingNum > 5) {
-    //   logger.error(`Invalid rating '${rating}' supplied`);
-    //     return res.status(400).send({
-    //       error: { message: `'rating' must be a number between 0 and 5`}
-    //     });
-    // }
 
     const newExpenses= { date_created, type, description, value, percentage };
 
-    const knexInstance = req.app.get('db');
-    ExpensesService.insertExpenses(knexInstance, newExpenses)
+    newExpenses.user_id = req.user.uid;
+
+    ExpensesService.insertExpenses(
+      req.app.get('db'),
+      newExpenses,
+      req.user.uid
+      )
       .then(expenses => {
         logger.info(`Expenses with id ${expenses.eid} created`);
         res
         .status(201)
         .location(path.posix.join(req.originalUrl) + `/${expenses.eid}`)
-        .json(serializeExpenses(expenses));
+        .json(ExpensesService.serializeExpense(expenses));
       })
       .catch(next);
   });
 
   expensesRouter
   .route('/:eid')
-  .all((req, res, next) => {
+  .all(requireAuth, (req, res, next) => {
     const { eid } = req.params;
 
     const knexInstance = req.app.get('db');
@@ -86,14 +73,16 @@ expensesRouter
       })
       .catch(next);
     })
-    .get((req, res, next) => {
-      res.json(serializeExpenses(res.expenses));
+    .get(requireAuth,(req, res, next) => {
+      res.json(ExpensesService.serializeExpense(res.expenses));
     })
-    .delete((req, res, next) => {
+    .delete(requireAuth,(req, res, next) => {
       const { eid } = req.params;
      
       const knexInstance = req.app.get('db');
-      ExpensesService.deleteExpenses(knexInstance, req.params.eid)
+      ExpensesService.deleteExpenses(
+        knexInstance, 
+        eid)
         .then( expense => {
             logger.info(`Expenses with id ${eid} deleted.`);
             res.status(204).json(expense);
@@ -103,7 +92,8 @@ expensesRouter
     .patch(jsonParser, (req, res, next) => {
         const { date_created, type, description, value, percentage } = req.body;
         const expensesToUpdate = { date_created, type, description, value, percentage };
-      
+        const { eid } = req.params;
+
         const numberOfValues = Object.values(expensesToUpdate).filter(Boolean).length;
           if (numberOfValues === 0)
             return res.status(400).json({
@@ -115,7 +105,7 @@ expensesRouter
         const knexInstance = req.app.get('db');
         ExpensesService.updateExpenses(
           knexInstance,
-          req.params.eid,
+          eid,
           expensesToUpdate
         )
           .then( () => {

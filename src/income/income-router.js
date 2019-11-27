@@ -53,9 +53,6 @@ incomeRouter
 
   incomeRouter
   .route('/:iid')
-  // .get(requireAuth, (req, res) => {
-  //   res.json(IncomeService.serializeIncome(res.inc));
-  // })
   .all(requireAuth, (req, res, next) => {
     const { iid } = req.params;
 

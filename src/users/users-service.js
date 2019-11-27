@@ -4,15 +4,6 @@ const xss = require('xss');
 const bcrypt = require('bcryptjs');
 
 const UsersService = {
-  insertUser(db, newUser) {
-    return db
-      .insert(newUser)
-      .into('users')
-      .returning('*')
-      .then(rows => {
-          return rows[0];
-      });
-    },
 
     validatePassword(password) {
         if (password.length < 8) {
@@ -37,6 +28,14 @@ const UsersService = {
             .then(user => !!user);
     },
     
+    insertUser(db, newUser) {
+      return db
+        .insert(newUser)
+        .into('users')
+        .returning('*')
+        .then(([user]) => user);
+      },
+
     serializeUser(user) {
         return {
           uid: user.uid,

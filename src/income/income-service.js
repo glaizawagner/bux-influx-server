@@ -46,6 +46,13 @@ const IncomeService = {
         .first();
     },
 
+    getUserAllIncome(db, user_id) {
+        return db
+        .select('*')
+        .from('income')
+        .where({user_id: user_id})
+    },
+
     insertIncome(db, newIncome) {
         return db
         .insert(newIncome)

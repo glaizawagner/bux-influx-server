@@ -1,6 +1,6 @@
 const express = require('express');
 const AuthService = require('./auth-service');
-const { requireAuth } = require('../middleware/jwt-auth');
+// const { requireAuth } = require('../middleware/jwt-auth');
 const authRouter = express.Router();
 const jsonBodyParser = express.json();
 
@@ -36,18 +36,22 @@ authRouter
                   const payload = { user_id: dbUser.uid };
                   res.send({
                     authToken: AuthService.createJwt(sub, payload),
+                    user_id: dbUser.uid
               });
           });
         })
-        .catch(next);
+        .catch((err) => {
+          console.log(err);
+          next(err);
+        });
   });
 
-  authRouter.post('/refresh', requireAuth, (req, res) => {
-    const sub = req.user.user_name;
-    const payload = { user_id: req.user.uid };
-    res.send({
-      authToken: AuthService.createJwt(sub, payload),
-    });
-  });
+  // authRouter.post('/refresh', requireAuth, (req, res) => {
+  //   const sub = req.user.user_name;
+  //   const payload = { user_id: req.user.uid };
+  //   res.send({
+  //     authToken: AuthService.createJwt(sub, payload),
+  //   });
+  // });
 
   module.exports = authRouter;
