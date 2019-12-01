@@ -1,5 +1,5 @@
 const xss = require('xss');
-const Treeize = require('treeize');
+// const Treeize = require('treeize');
 
 const IncomeService = {
     getAllIncome(db) {
@@ -11,25 +11,22 @@ const IncomeService = {
                 'inc.type',
                 'inc.description',
                 'inc.value',
-                ...userFields,
+                ...userFields
             )
                 .leftJoin(
                     'users AS usr',
                     'inc.user_id',
-                    'usr.uid',
+                    'usr.uid'
                 )
-            .groupBy('inc.iid', 'usr.uid')
+            .groupBy('inc.iid', 'usr.uid');
 
     },
 
     serializeIncomes(incomes){
-        return incomes.map(this.serializeIncome)
+        return incomes.map(this.serializeIncome);
     },
 
     serializeIncome(inc) {
-        // const incomeTree = new Treeize()
-
-        // const incomeData = incomeTree.grow([ inc ]).getData()[0]
         return {
             iid: inc.iid,
             date_created: inc.date_created,
@@ -37,7 +34,7 @@ const IncomeService = {
             description: xss(inc.description),
             value: inc.value,
             user_id: inc.user_id
-        }
+        };
     },
 
     getById(db, id, user_id) {
@@ -50,7 +47,7 @@ const IncomeService = {
         return db
         .select('*')
         .from('income')
-        .where({user_id: user_id})
+        .where({user_id: user_id});
     },
 
     insertIncome(db, newIncome) {
@@ -68,12 +65,12 @@ const IncomeService = {
           .delete();
     },
     updateIncome(db, id, newincomeFields) {
-        return knex('income')
+        return db('income')
           .where('iid', id)
           .update(newincomeFields);
     },
 
-}
+};
 
 const userFields = [
     'usr.uid AS user:uid',
@@ -82,6 +79,6 @@ const userFields = [
     'usr.nickname AS user:nickname',
     'usr.date_created AS user:date_created',
     'usr.date_modified AS user:date_modified',
-]
+];
 
 module.exports = IncomeService;

@@ -10,35 +10,34 @@ const jsonParser = express.json();
 /* income routes */
 incomeRouter
   .route('/')
-  .get(requireAuth,(req, res, next) => {
+  .get(requireAuth, (req, res, next) => {
     IncomeService.getAllIncome(
       req.app.get('db'),
       req.user.uid
       )
       .then(incomes => {
-          res.json(IncomeService.serializeIncomes(incomes));
+          res.json(IncomeService.serializeIncome(incomes));
       })
       .catch(next);
   })
   .post(requireAuth, jsonParser, (req, res, next) => {
-    for(const field of ['description']) {
-      if(!req.body[field]) {
-        logger.error(`${field} is required`);
+    const { date_created, type, description, value } = req.body;
+    const newIncome= { date_created, type, description, value };
+
+    for(const [key, value] of Object.entries(newIncome)) {
+      if(value === null) {
+        logger.error(`${key} is required`);
           return res.status(400).send({
-            error: {message: `'${field}' is required`}
+            error: {message: `Missing ${key}' is required`}
           });
       }
     }
-
-    const { date_created, type, description, value } = req.body;
-    
-    const newIncome= { date_created, type, description, value };
 
     newIncome.user_id = req.user.uid;
 
     IncomeService.insertIncome(
       req.app.get('db'), 
-      newIncome, 
+      newIncome,
       req.user.uid
      )
       .then(income => {
@@ -53,10 +52,10 @@ incomeRouter
 
   incomeRouter
   .route('/:iid')
-  .all(requireAuth, (req, res, next) => {
+  .get((req, res, next) => {
+    const knexInstance = req.app.get('db');
     const { iid } = req.params;
 
-    const knexInstance = req.app.get('db');
     IncomeService.getById(knexInstance, iid)
       .then(income => {
           //make sure we found a income

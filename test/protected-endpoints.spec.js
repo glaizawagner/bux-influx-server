@@ -1,6 +1,7 @@
-const knex = require('knex')
-const app = require('../src/app')
-const helpers = require('./test-helpers')
+/* eslint-disable quotes */
+const knex = require('knex');
+const app = require('../src/app');
+const helpers = require('./test-helpers');
 
 describe('Protected Endpoints', function() {
   let db;
@@ -14,7 +15,7 @@ describe('Protected Endpoints', function() {
       client: 'pg',
       connection: process.env.TEST_DATABASE_URL,
     });
-    app.set('db', db)
+    app.set('db', db);
   });
 
   after('disconnect from db', () => db.destroy());
@@ -25,36 +26,36 @@ describe('Protected Endpoints', function() {
       helpers.seedIncomeTables(
         db,
         testUsersInc,
-        testIncome,
+        testIncome
       )
-  )
+  );
 
   const protectedEndpoints = [
+    {
+      name: 'GET /api/income',
+      path: '/api/income',
+      method: supertest(app).get
+    },
     {
         name: 'GET /api/income/:iid',
         path: '/api/income/1',
         method: supertest(app).get
-    },
-    {
-        name: 'POST /api/auth/refresh',
-        path: '/api/auth/refresh',
-        method: supertest(app).post,
-    },
-  ]
+    }
+  ];
 
     protectedEndpoints.forEach(endpoint => {
         describe(endpoint.name, () => { 
             it(`responds 401 'Missing bearer token' when no bearer token`, () => {
                 return endpoint.method(endpoint.path)
-                    .expect(401, { error: `Missing bearer token` })
-            })
+                    .expect(401, { error: `Missing bearer token` });
+            });
             it(`responds 401 'Unauthorized request' when invalid JWT secret`, () => {
-                const validUser = testUsersInc[0]
-                const invalidSecret = 'bad-secret'
+                const validUser = testUsersInc[0];
+                const invalidSecret = 'bad-secret';
                 return endpoint.method(endpoint.path)
                 .set('Authorization', helpers.makeAuthHeader(validUser, invalidSecret))
-                .expect(401, { error: `Unauthorized request` })
-            })
-        })
+                .expect(401, { error: `Unauthorized request` });
+            });
+        });
     });
-})
+});

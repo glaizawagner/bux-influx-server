@@ -34,6 +34,7 @@ const ExpensesService = {
             type: exp.type,
             description: xss(exp.description),
             value: exp.value,
+            percentage: exp.percentage,
             user_id: exp.user_id
         }
 
@@ -51,6 +52,13 @@ const ExpensesService = {
         .from('expenses')
         .where({user_id: user_id})
     },
+
+    // updateUserPercExpenses(db, user_id, newPerc) {
+    //     return db
+    //     .select('*')
+    //     .from('expenses')
+    //     .where({user_id: user_id})
+    // },
 
     insertExpenses(db, newExpenses) {
         return db

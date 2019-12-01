@@ -39,7 +39,8 @@ function makeUsersArray() {
   ];
 }
 
-//make income array
+
+//make income user array
 function makeIncomeArray(users) {
     return [
         {
@@ -61,7 +62,7 @@ function makeIncomeArray(users) {
     ];
 }
 
-//make expenses array
+//make expenses  user array
 function makeExpensesArray(users) {
     return [
         {
@@ -80,14 +81,14 @@ function makeExpensesArray(users) {
             description: 'Other Expenses',
             value: '1500.00',
             percentage: '15.00',
-            user_id: users[1].uid
+            user_id: users[0].uid
         },
 
     ];
 }
 
 //make expected income
-function makeExpectedIncome(users, inc) {
+function makeExpectedIncome(users, inc = []) {
   const user = users
     .find(user => user.uid === inc.user_id)
   
@@ -106,6 +107,29 @@ function makeExpectedIncome(users, inc) {
       },
     }
 }
+
+//make expected expenses
+function makeExpectedExpenses(users, exp = []) {
+  const user = users
+    .find(user => user.uid === exp.user_id)
+  
+    return {
+      eid: exp.eid,
+      date_created: exp.date_created,
+      type: exp.type,
+      description: exp.description,
+      value: exp.value,
+      percentage: exp.percentage,
+      user: {
+        uid: user.uid,
+        user_name: user.user_name,
+        full_name: user.full_name,
+        nickname: user.nickname,
+        date_created: user.date_created,
+      },
+    }
+}
+
 //seed malicious income
 function seedMaliciousIncome(db, user, income) {
     return seedUsers(db, [user])
@@ -132,15 +156,14 @@ function makeMaliciousIncome(user) {
         iid: 911,
         date_created: '2019-11-12T16:28:32.615Z',
         type: 'inc',
-        description: 'Naughty naughty very naughty <script>alert("xss");</script>',
-        value: '3500.00',
-        user_id: user.uid,
+        description: `Naughty naughty very naughty <script>alert("xss");</script>`,
+        value: '3500.00'
+      
     }
     const expectedIncome = {
         ...makeExpectedIncome([user], maliciousIncome),
-        description: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
+        description: `Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;`,
     }
-
     return {
         maliciousIncome,
         expectedIncome
@@ -155,11 +178,12 @@ function makeMaliciousExpenses(user) {
         type: 'exp',
         description: 'Naughty naughty very naughty <script>alert("xss");</script>',
         value: '3500.00',
-        percentage: '17.00'
+        percentage: '17.00',
+        user_id: user[1].uid
     }
     const expectedExpenses = {
-        ...maliciousExpenses,
-        description: 'Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;',
+        ...makeExpectedExpenses([user], maliciousExpenses),
+        description: `Naughty naughty very naughty &lt;script&gt;alert(\"xss\");&lt;/script&gt;`,
     }
 
     return {
@@ -184,12 +208,25 @@ function makeExpensesFixtures() {
 
 //clean tables
 function cleanTables(db) {
-    return db.raw(
+    return db.transaction(trx =>
+      trx.raw(
       `TRUNCATE
         income,
         expenses,
         users
-        RESTART IDENTITY CASCADE`
+        RESTART IDENTITY CASCADE
+        `
+    )
+      .then(() =>
+        Promise.all([
+            trx.raw('ALTER SEQUENCE income_iid_seq minvalue 0 START WITH 1'),
+            trx.raw('ALTER SEQUENCE expenses_eid_seq minvalue 0 START WITH 1'),
+            trx.raw('ALTER SEQUENCE users_uid_seq minvalue 0 START WITH 1'),
+            trx.raw('SELECT setVal(\'income_iid_seq\',0)'),
+            trx.raw('SELECT setVal(\'expenses_eid_seq\',0)'),
+            trx.raw('SELECT setVal(\'users_uid_seq\',0)'),
+        ])
+      )
     )
 }
 
@@ -210,19 +247,19 @@ function seedUsers(db, users) {
 }
 
 //seed income table
-function seedIncomeTables(db, users, inc) {
+function seedIncomeTables(db, users, income = []) {
     return db.transaction(async trx => {
       await seedUsers(trx, users);
-      await trx.into('income').insert(inc);
+      await trx.into('income').insert(income);
       await trx.raw(
-                 `SELECT setval('income_iid_seq', ?)`,
-                 [inc[inc.length - 1].iid],
+                 `SELECT setVal('income_iid_seq', ?)`,
+                 [income[income.length - 1].iid],
                );
   })
 }
 
 //seed expenses table
-function seedExpensesTables(db, users, expense) {
+function seedExpensesTables(db, users, expense = []) {
     return db.transaction(async trx => {
       await seedUsers(trx, users);
       await trx.into('expenses').insert(expense);
@@ -244,6 +281,7 @@ function makeAuthHeader(user, secret = process.env.JWT_SECRET) {
   
 module.exports = {
     makeUsersArray,
+    makeIncomeArray,
     makeExpensesArray,
     makeExpectedIncome,
     makeMaliciousIncome,

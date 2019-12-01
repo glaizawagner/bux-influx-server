@@ -1,89 +1,186 @@
 /* eslint-disable quotes */
 const knex = require('knex');
+const jwt = require('jsonwebtoken');
 const app = require('../src/app');
 const helpers = require('./test-helpers');
 
-describe('Income Endpoints', function() {
-    let db;
+describe.only('Income Endpoints', function() {
+let db;
 
-    const {
-      testUsersInc,
-      testIncome,
-    } = helpers.makeIncomeFixtures();
+  const {
+    testUsersInc,
+    testIncome,
+  } = helpers.makeIncomeFixtures();
 
-    before('make knex instance', () => {
-        db = knex({
-            client: 'pg',
-            connection: process.env.TEST_DATABASE_URL,
-        });
-        app.set('db', db);
+  before('make knex instance', () => {
+    db = knex({
+      client: 'pg',
+      connection: process.env.TEST_DATABASE_URL,
     });
-    
-    after('disconnect from db', () => db.destroy());
-    before('clean the table', () => helpers.cleanTables(db));
-    afterEach('cleanup', () => helpers.cleanTables(db));
-  
-//done
+    app.set('db', db);
+  });
+
+  after('disconnect from db', () => db.destroy());
+  before('cleanup', () => helpers.cleanTables(db));
+  afterEach('cleanup', () => helpers.cleanTables(db));
+
+  beforeEach('insert income', () =>
+    helpers.seedIncomeTables(
+        db,
+        testUsersInc,
+        testIncome
+    )
+ );
+
+  const protectedEndpoints = [
+    {
+        name: 'GET /api/income',
+        path: '/api/income',
+        method: supertest(app).get
+    },
+    {
+        name: 'GET /api/income/:iid',
+        path: '/api/income/1',
+        method: supertest(app).get
+    }
+  ];
+
+    protectedEndpoints.forEach(endpoint => {
+        describe(endpoint.name, () => { 
+            it(`responds 401 'Missing bearer token' when no bearer token`, () => {
+                return endpoint.method(endpoint.path)
+                    .expect(401, { error: `Missing bearer token` });
+            });
+            it(`responds 401 'Unauthorized request' when invalid JWT secret`, () => {
+                const validUser = testUsersInc[0];
+                const invalidSecret = 'bad-secret';
+                return endpoint.method(endpoint.path)
+                .set('Authorization', helpers.makeAuthHeader(validUser, invalidSecret))
+                .expect(401, { error: `Unauthorized request` });
+            });
+            it(`responds with 401 'Unauthorized request' when invalid sub in payload`, () => {
+                const invalidUser = { user_name: 'bad', id: 1 };
+                return endpoint.method(endpoint.path)
+                  .set('Authorization', helpers.makeAuthHeader(invalidUser))
+                  .expect(401, { error: 'Unauthorized request' });
+            });
+        });
+    });
+
     describe(`GET /api/income`, () => {
-        // context(`Given no income`, () => {
-        //     it(`responds with 200 and an empty list`, () => {
-        //       return supertest(app)
-        //         .get('/api/income')
-        //         .expect(200, []);
-        //     });
-        // });
-      
-        context('Given there are income in the database', () => {
-          // beforeEach('insert income', () =>
-          //   helpers.seedIncomeTables(
-          //     db,
-          //     testUsersInc,
-          //     testIncome, 
-          //   )
-          // )
-  
-          // console.log(testUsersInc)
-          // console.log(testIncome)
-          // it('responds with 200 and all of the income', () => {
-          //   const expectedIncome = testIncome.map(inc =>
-          //     helpers.makeExpectedIncome(
-          //       testUsersInc,
-          //       inc,
-          //     )
-          //   )
-          //   return supertest(app)
-          //     .get('/api/income')
-          //     .expect(200, expectedIncome)
-          // })
+        context(`Given no income`, () => {
+            it(`responds with 200 and an empty list`, () => {
+              return supertest(app)
+                .get('/api/income')
+                .set('Authorization', helpers.makeAuthHeader(testUsersInc[0]))
+                .expect(200, []);
+            });
         });
+        // context('Given there are income in the database', () => {
+        //     // beforeEach('insert income', () =>
+        //     //   helpers.seedIncomeTables(
+        //     //     db,
+        //     //     testUsersInc,
+        //     //     testIncome
+        //     //   )
+        //     // );
+    
+        //     // console.log(testUsersInc);
+        //     // console.log(testIncome);
+        //     // it('responds with 200 and all of the income', () => {
+        //     //   const expectedIncome = testIncome.map(inc =>
+        //     //     helpers.makeExpectedIncome(
+        //     //       testUsersInc,
+        //     //       inc
+        //     //     )
+        //     //   );
+        //     //   return supertest(app)
+        //     //     .get('/api/income')
+        //     //     .set('Authorization', helpers.makeAuthHeader(testUsersInc[0]))
+        //     //     .expect(200, expectedIncome);
+        //     // });
+        //   });
+          
+        //   context(`Given an XSS attack income`, () => {
+        //       const testUserInc = helpers.makeUsersArray()[1];
+        //       const {
+        //         maliciousIncome,
+        //         expectedIncome,
+        //       } = helpers.makeMaliciousIncome(testUserInc);
+        
+        //       beforeEach('insert malicious income', () => {
+        //         return helpers.seedMaliciousIncome(
+        //           db,
+        //           testUserInc,
+        //           maliciousIncome
+        //         );
+        //       });
+        
+        //       it('removes XSS attack content', () => {
+        //         return supertest(app)
+        //           .get(`/api/income`)
 
-        context(`Given an XSS attack income`, () => {
-        //   const testUserInc = helpers.makeUsersArray()[1]
-        //   const {
-        //     maliciousIncome,
-        //     expectedIncome,
-        //   } = helpers.makeMaliciousIncome(testUserInc)
-    
-        //   beforeEach('insert malicious income', () => {
-        //     return helpers.seedMaliciousIncome(
-        //       db,
-        //       testUserInc,
-        //       maliciousIncome,
-        //     )
-        //   })
-    
-        //   it('removes XSS attack content', () => {
-        //     return supertest(app)
-        //       .get(`/api/income`)
-        //       .expect(200)
-        //       .expect(res => {
-        //         expect(res.body[0].description).to.eql(expectedIncome.description)
-        //       })
-        //   })
-        // });
+        //           .expect(200)
+        //           .expect(res => {
+        //             expect(res.body[0].description).to.eql(expectedIncome.description)
+        //           });
+        //       });
+        //     });
     });
+
+
+});
+
+    // describe(`GET /api/income`, () => {
+    //     beforeEach('insert income', () =>
+    //         helpers.seedIncomeTables(
+    //           db,
+    //           testUsersInc,
+    //           testIncome
+    //         )
+    //       );
+    //       it.only('responds with 200 and all of the income', () => {
+    //         const expectedIncome = testIncome.map(inc =>
+    //           helpers.makeExpectedIncome(
+    //             testUsersInc,
+    //             inc
+    //           )
+    //         );
+    //         return supertest(app)
+    //           .get('/api/income')
+    //           .set('Authorization', helpers.makeAuthHeader(testUsersInc[0]))
+    //           .expect(200, expectedIncome);
+    //       });
+    // });
+
+    //     context(`Given an XSS attack income`, () => {
+    //       const testUserInc = helpers.makeUsersArray()[1];
+    //       const {
+    //         maliciousIncome,
+    //         expectedIncome,
+    //       } = helpers.makeMaliciousIncome(testUserInc);
     
-    describe(`GET /api/income/:iid`, () => {
+    //       beforeEach('insert malicious income', () => {
+    //         return helpers.seedMaliciousIncome(
+    //           db,
+    //           testUserInc,
+    //           maliciousIncome
+    //         );
+    //       });
+    
+    //       it('removes XSS attack content', () => {
+    //         return supertest(app)
+    //           .get(`/api/income`)
+    //           .expect(200)
+    //           .expect(res => {
+    //             expect(res.body[0].description).to.eql(expectedIncome.description);
+    //           });
+    //       });
+    //     });
+    // });
+    
+// });
+    // describe(`GET /api/income/:iid`, () => {
         // context(`Given no income`, () => {
         //   beforeEach(() =>
         //     helpers.seedUsers(db, 
@@ -97,7 +194,7 @@ describe('Income Endpoints', function() {
         //         .set('Authorization', helpers.makeAuthHeader(testUsersInc[0]))
         //         .expect(404, { error:  {message: `Income doesn't exist`}});
         //   });
-        });
+        // });
 
         //to fix
         // context('Given there are income in the database', () => {
@@ -147,7 +244,7 @@ describe('Income Endpoints', function() {
         //     });
         // });
 
-    });
+    // });
    
     // describe(`POST /api/income`, () => {
     //     it(`creates a new income, responding with 201 and the new income`, () => {
@@ -344,5 +441,5 @@ describe('Income Endpoints', function() {
     //   });
     // });
 
-});
+
 
