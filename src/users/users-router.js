@@ -93,7 +93,7 @@ usersRouter
   .get((req, res) => {
       const currentUser = {
         user_name: req.user.user_name,
-        user_id: req.user.uid
+        uid: req.user.uid
       };
 
       return res.status(200).json(UsersService.serializeUser(currentUser));
