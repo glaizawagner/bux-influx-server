@@ -122,7 +122,7 @@ describe('Users Endpoints', function() {
               return supertest(app)
                 .post('/api/users')
                 .send(duplicateUser)
-                .expect(400, { error: 'Username already taken' })
+                .expect(400, { error: 'Username already taken' });
       });
     });
 
@@ -155,20 +155,20 @@ describe('Users Endpoints', function() {
                 .where({ uid: res.body.uid })
                 .first()
                 .then(row => {
-                  expect(row.user_name).to.eql(newUser.user_name)
-                  expect(row.full_name).to.eql(newUser.full_name)
-                  expect(row.nickname).to.eql(null)
-                  const expectedDate = new Date().toLocaleString('en', { timeZone: 'UTC' })
-                  const actualDate = new Date(row.date_created).toLocaleString()
-                  expect(actualDate).to.eql(expectedDate)
+                  expect(row.user_name).to.eql(newUser.user_name);
+                  expect(row.full_name).to.eql(newUser.full_name);
+                  expect(row.nickname).to.eql(null);
+                  const expectedDate = new Date().toLocaleString('en', { timeZone: 'UTC' });
+                  const actualDate = new Date(row.date_created).toLocaleString();
+                  expect(actualDate).to.eql(expectedDate);
 
-                  return bcrypt.compare(newUser.password, row.password)
+                  return bcrypt.compare(newUser.password, row.password);
                 })
                   .then(compareMatch => {
-                      expect(compareMatch).to.be.true
+                      expect(compareMatch).to.be.true;
                   })
-                )
-      })
+                );
+      });
     });
 
   });

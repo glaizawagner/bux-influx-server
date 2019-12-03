@@ -7110,3 +7110,16 @@
 {"name":"error","length":93,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
 {"message":"Expenses with id 127 deleted.","level":"info"}
 {"message":"Expenses with id 132 created","level":"info"}
+{"name":"error","length":93,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"name":"error","length":93,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"name":"error","length":93,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"name":"error","length":93,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"name":"error","length":93,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"name":"error","length":93,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"name":"error","length":93,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"name":"error","length":93,"severity":"ERROR","code":"22P02","file":"numutils.c","line":"62","routine":"pg_atoi","level":"error"}
+{"message":"Income with id 118 created","level":"info"}
+{"message":"Expenses with id 133 created","level":"info"}
+{"message":"Income with id 118 deleted.","level":"info"}
+{"message":"Expenses with id 133 deleted.","level":"info"}
+{"message":"Income with id 119 created","level":"info"}
