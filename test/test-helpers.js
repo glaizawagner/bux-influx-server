@@ -265,7 +265,7 @@ function seedExpensesTables(db, users, expense = []) {
       await trx.into('expenses').insert(expense);
       await trx.raw(
                  `SELECT setval('expenses_eid_seq', ?)`,
-                 [expense[inc.length - 1].eid],
+                 [expense[expense.length - 1].eid],
                );
   })
 }
