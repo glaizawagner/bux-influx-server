@@ -7123,3 +7123,15 @@
 {"message":"Income with id 118 deleted.","level":"info"}
 {"message":"Expenses with id 133 deleted.","level":"info"}
 {"message":"Income with id 119 created","level":"info"}
+{"message":"Expenses with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 1 deleted.","level":"info"}
+{"message":"Income with id 2 deleted.","level":"info"}
+{"message":"Expenses with id 3 created","level":"info"}
+{"message":"Income with id 3 created","level":"info"}
+{"message":"Expenses with id 4 created","level":"info"}
+{"message":"Expenses with id 5 created","level":"info"}
+{"message":"Expenses with id 3 deleted.","level":"info"}
+{"message":"Expenses with id 6 created","level":"info"}
+{"message":"Expenses with id 5 deleted.","level":"info"}
+{"message":"Expenses with id 4 deleted.","level":"info"}
+{"message":"Expenses with id 7 created","level":"info"}

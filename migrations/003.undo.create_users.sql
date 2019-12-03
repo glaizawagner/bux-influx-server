@@ -7,4 +7,4 @@ ALTER TABLE expenses
     DROP COLUMN IF EXISTS user_id;
 
 -- users
-DROP TABKE IF EXISTS users;
+DROP TABLE IF EXISTS users;
