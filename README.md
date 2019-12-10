@@ -1,26 +1,23 @@
-# Express Boilerplate!
+# Bux Influx Server and Database
 
-This is a boilerplate project used for starting new projects!
+Live app: [Bux Influx](https://glaiza-buxinflux-app.now.sh/)
 
-## Set up
+# The API
+This API was built using NodeJS, Express, and PostgresSQL. Most of the endpoints are protected with a JWT auth requirement.
 
-Complete the following steps to start a new project (NEW-PROJECT-NAME):
+# Endpoints
+The following are the request endpoints for this server :::
 
-1. Clone this repository to your local machine `git clone BOILERPLATE-URL NEW-PROJECTS-NAME`
-2. `cd` into the cloned repository
-3. Make a fresh start of the git history for this project with `rm -rf .git && git init`
-4. Install the node dependencies `npm install`
-5. Move the example Environment file to `.env` that will be ignored by git and read by the express server `mv example.env .env`
-6. Edit the contents of the `package.json` to use NEW-PROJECT-NAME instead of `"name": "express-boilerplate",`
+Base URL = https://glaiza-buxinflux-server.herokuapp.com/api
 
-## Scripts
+# GET:
+    /users/:uid/income -> protected endpoint. Will return all the users income that matches the uid param;
 
-Start the application `npm start`
+    /users/:uid/expenses -> protected endpoint. Will return all the users expenses that matches the uid param
 
-Start nodemon for the application `npm run dev`
+# DELETE:
+    /income/:iid -> protected endpoint. Will delete the income that matches the iid param;
 
-Run the tests `npm test`
+    /expenses/:eid -> protected endpoint. Will delete the expenses that matches the eid param
 
-## Deploying
-
-When your new project is ready for deployment, add a new Heroku application with `heroku create`. This will make a new git remote called "heroku" and you can then `npm run deploy` which will push to this remote's master branch.
+# POST:
