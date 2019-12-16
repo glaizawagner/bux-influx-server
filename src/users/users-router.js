@@ -6,7 +6,7 @@ const UsersService = require('../users/users-service');
 const usersRouter = express.Router();
 const jsonBodyParser = express.json();
 const { requireAuth } = require('../middleware/jwt-auth');
-const AuthService = require('../auth/auth-service');
+// const AuthService = require('../auth/auth-service');
 const IncomeService = require('../income/income-service');
 const ExpenseService = require('../expenses/expenses-service');
 
